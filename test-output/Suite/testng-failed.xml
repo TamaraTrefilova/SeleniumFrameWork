@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="-1" guice-stage="DEVELOPMENT" name="Failed suite [Suite]">
+  <test name="Test(failed)">
+    <parameter name="start-page" value="http://amazon.com"/>
+    <parameter name="browser" value="chrome"/>
+    <parameter name="chrome-driver" value="C:/Drivers/chromedriver_win32/chromedriver.exe"/>
+    <parameter name="firefox-driver" value="C:/Drivers/gecko/geckodriver.exe"/>
+    <classes>
+      <class name="TestFrameWork_Test.SignInTest">
+        <methods>
+          <include name="signIn"/>
+          <include name="beforeClass"/>
+          <include name="afterTest"/>
+          <include name="beforeTestDo"/>
+          <include name="beforeMethod"/>
+          <include name="afterClass"/>
+          <include name="beforeTest"/>
+          <include name="afterMethod"/>
+        </methods>
+      </class> <!-- TestFrameWork_Test.SignInTest -->
+    </classes>
+  </test> <!-- Test(failed) -->
+</suite> <!-- Failed suite [Suite] -->

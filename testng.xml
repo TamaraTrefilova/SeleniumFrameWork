@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite  SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite" parallel="false">
+	<test name="Test">
+		<parameter name="browser" value="chrome" />
+		<parameter name="start-page" value="http://amazon.com" />
+		<parameter name="chrome-driver"
+			value="C:/Drivers/chromedriver_win32/chromedriver.exe" />
+		<parameter name="firefox-driver" value="C:/Drivers/gecko/geckodriver.exe" />
+		<classes>
+			<class name="TestFrameWork_Test.HomePageContentTest" />
+
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->
