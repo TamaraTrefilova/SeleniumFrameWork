@@ -1,53 +1,43 @@
-package TestFrameWork_Lib;
+package TestFrameWork_Test;
 
-import org.openqa.selenium.WebDriver;
+import static org.testng.Assert.assertTrue;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-public class SignInPage {
-	public static String E_MAIL = "stamara@yandex.ru";
-	public static String PSWD = "qwerty";
-	public static String REGISTRATION = "Amazon Registration";
-	
-	public SignInPage(WebDriver driver) {
-		PageFactory.initElements(driver, this);
+import TestFrameWork_Lib.HomePage;
+import TestFrameWork_Lib.SignInPage;
+
+public class SignInTest extends BaseTestSetup {
+	HomePage home;
+	SignInPage signInPage;
+
+	@BeforeTest
+	public void beforeTestDo() throws InterruptedException {
+		home = new HomePage(driver);
+		signInPage = new SignInPage(driver);
+		home.SignIn.click();
+		Thread.sleep(3000);
 	}
-	
-	
-	@FindBy(css= "#ap_email")
-	public WebElement e_mail;
-	
-	@FindBy(id = "ap_password")
-	public WebElement pswd;
-	
-	@FindBy(id="signInSubmit")
-	public WebElement signIn;
-	
-	@FindBy(id="createAccountSubmit")
-	public WebElement createAccount;
-	
-	@FindBy(id="ap_customer_name")
-	public WebElement name;
-	
-	@FindBy(id="ap_email")
-	public WebElement e_mail_new;
-	
-	@FindBy(id = "ap_password")
-	public WebElement pswd_new;
-	
-	@FindBy(id = "ap_password_check")
-	public WebElement pswd_check;
-	
-	@FindBy(css = "#continue")
-	public WebElement submit;
-	
-	@FindBy(xpath="//span[text()='Hello, Tamara']")
-	public WebElement customerName;
-	
-	public void sendKeys(WebElement element, String key) {
-		element.sendKeys(key);
+
+	@Test
+	public void signIn() throws InterruptedException {
+		try {
+			driver.findElement(By.id("ap-credential-autofill-hint"));
+			signInPage.sendKeys(signInPage.e_mail, SignInPage.E_MAIL);
+			signInPage.submit.click();
+			Thread.sleep(2000);
+			signInPage.sendKeys(signInPage.pswd, SignInPage.PSWD);
+			signInPage.signIn.click();			
+		} catch(NoSuchElementException e) {
+			signInPage.sendKeys(signInPage.e_mail, SignInPage.E_MAIL);
+			signInPage.sendKeys(signInPage.pswd, SignInPage.PSWD);
+			signInPage.signIn.click();
+		}
+
+		assertTrue(signInPage.customerName.isDisplayed());
 	}
-	
-	
 }
