@@ -21,9 +21,19 @@ public class SignInTest extends BaseTestSetup {
 
 	@Test
 	public void signIn() throws InterruptedException {
-		signInPage.sendKeys(signInPage.e_mail, SignInPage.E_MAIL);
-		signInPage.sendKeys(signInPage.pswd, SignInPage.PSWD);
-		signInPage.signIn.click();
+		try {
+			driver.findElement(By.id("ap-credential-autofill-hint"));
+			signInPage.sendKeys(signInPage.e_mail, SignInPage.E_MAIL);
+			signInPage.submit.click();
+			Thread.sleep(2000);
+			signInPage.sendKeys(signInPage.pswd, SignInPage.PSWD);
+			signInPage.signIn.click();			
+		} catch(NoSuchElementException e) {
+			signInPage.sendKeys(signInPage.e_mail, SignInPage.E_MAIL);
+			signInPage.sendKeys(signInPage.pswd, SignInPage.PSWD);
+			signInPage.signIn.click();
+		}
+
 		assertTrue(signInPage.customerName.isDisplayed());
 	}
 }
